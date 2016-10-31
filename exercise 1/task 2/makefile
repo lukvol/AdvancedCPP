@@ -7,11 +7,11 @@ OBJS_DRIVER_2 = fraction.o main2.o
 
 all: driver1 driver2
 
-driver2: $(OBJS_DRIVER_2)
-	$(CC) $(OBJS_DRIVER_2) -o driver2
-
 driver1: $(OBJS_DRIVER_1)
 	$(CC) $(OBJS_DRIVER_1) -o driver1
+
+driver2: $(OBJS_DRIVER_2)
+	$(CC) $(OBJS_DRIVER_2) -o driver2
 
 main1.o: fraction.h main1.cpp
 	$(CC) $(CFLAGS) main1.cpp
