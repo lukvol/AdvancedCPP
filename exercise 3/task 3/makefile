@@ -1,6 +1,6 @@
-CC = g++-6
+CC = g++
 DEBUG = -g
-CFLAGS = -Wall -Wextra -Werror -c
+CFLAGS = -Wall -Wextra -Werror -c -std=c++11
 LFLAGS = -Wall $(DEBUG)
 OBJS = main.o fraction.o
 

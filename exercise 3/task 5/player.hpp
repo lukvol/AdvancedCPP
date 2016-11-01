@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 
 #include <iostream>
+#include "playfield.hpp"
 
 /**
  * Class player, which is used to play the game as player or against a bot.
