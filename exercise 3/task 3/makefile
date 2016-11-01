@@ -12,11 +12,12 @@ driver: $(OBJS)
 main.o: RPN.h fraction.h main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
-fraction.o: fraction.h mymin.h fraction.cpp
+fraction.o: fraction.h fraction.cpp
 	$(CC) $(CFLAGS) fraction.cpp
 
 clean:
 	\rm -f driver *.o
+	\rm *.txt
 
 distclean: clean
 	\rm -f .depend/*.d
