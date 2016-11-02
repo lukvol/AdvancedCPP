@@ -4,13 +4,13 @@
 #include "playfield.hpp"
 #include <iostream>
 
-template<typename P>
+template<typename P, typename T>
 class connect4 {
 private:
 	//player from a player class with typename P
-	P *current_player;
+	int current_player_token = 1;
 	P player1;
-	P player2;
+	T player2;
 	//bool to check if game is over, used for the main looü
 	bool is_finished = false;
 	//holding the player field
@@ -35,11 +35,10 @@ public:
 /**
  * Completes setup of the field and starts main loop
  */
-template<typename P>
-void connect4<P>::start_game() {
+template<typename P, typename T>
+void connect4<P,T>::start_game() {
 	field = playfield();
 	field.clear_array();
-	current_player = &player1; 
 	field.show_field();
 	while(!is_finished) {
 		play_turn();
@@ -49,15 +48,20 @@ void connect4<P>::start_game() {
 /**
  * Function is called everytime a player is on his turn
  */
-template<typename P>
-void connect4<P>::play_turn() {
-	int player_token = current_player == &player1 ? 1 : 2;
+template<typename P, typename T>
+void connect4<P,T>::play_turn() {
 	int column;
-	do { column = current_player->play(field); }
-	while (!field.place_stone_at(column, player_token));
+	do { 
+		if (current_player_token == 1) {
+			column = player1.play(field);
+		} else {
+			column = player2.play(field);
+		}
+	}
+	while (!field.place_stone_at(column, current_player_token));
 	field.show_field();
-	check_game_state(player_token);
-	current_player = current_player == &player1 ? &player2 : &player1;
+	check_game_state(current_player_token);
+	current_player_token = current_player_token == 1 ? 2 : 1;
 }
 
 /**
@@ -65,8 +69,8 @@ void connect4<P>::play_turn() {
  * @param player number of the player
  * @return int of what happend 0 nothing special, -1 board is full, 1 if the last player won
  */
-template<typename P>
-int connect4<P>::check_game_state(int player) {
+template<typename P, typename T>
+int connect4<P,T>::check_game_state(int player) {
 	if (hasWon(player)) {
 		is_finished = true;
 		std::cout << "Player " << player << " has won. Congratulations!" << std::endl;
@@ -85,8 +89,8 @@ int connect4<P>::check_game_state(int player) {
  * @param player number of the player
  * @return bool if the game is won with the last token
  */
-template<typename P>
-bool connect4<P>::hasWon(int player) {
+template<typename P, typename T>
+bool connect4<P,T>::hasWon(int player) {
 	for (int i = 0; i < playfield::width; i++) {
 		for (int j = 0; j < playfield::height; j++) {
 			if (field.stoneat(i, j)-48 == player) {
@@ -113,8 +117,8 @@ bool connect4<P>::hasWon(int player) {
  * @param step variables which saves the recursive steps
  * @return bool if the game is won with the last token
  */
-template<typename P>
-bool connect4<P>::recursiveHasWon(int player, int x, int y, int x_dir, int y_dir, int step) {
+template<typename P, typename T>
+bool connect4<P,T>::recursiveHasWon(int player, int x, int y, int x_dir, int y_dir, int step) {
 	if (x + x_dir < playfield::width && y + y_dir < playfield::height &&
 			x + x_dir >= 0 && y + y_dir >= 0) {
 		if (field.stoneat(x + x_dir, y + y_dir)-48 == player) {

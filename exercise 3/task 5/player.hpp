@@ -2,7 +2,6 @@
 #define PLAYER_HPP
 
 #include <iostream>
-#include "playfield.hpp"
 
 /**
  * Class player, which is used to play the game as player or against a bot.
@@ -76,7 +75,7 @@ int player<F>::play(const F &field) {
  */
 template<typename F>
 int player<F>::can_win(int player, const F &field) {
-	for (int i = 0; i < playfield::width; i++) {
+	for (int i = 0; i < F::width; i++) {
 		int j=height_for_row(i,field);
 		if (recursive_can_win(player, i, j, 1, 1, field)+recursive_can_win(player, i, j, -1, -1, field)>=3 ||
 			recursive_can_win(player, i, j, 1, 0, field)+recursive_can_win(player, i, j, -1, 0, field)>=3 ||
@@ -102,7 +101,7 @@ int player<F>::can_win(int player, const F &field) {
  */
 template<typename F>
 int player<F>::recursive_can_win(int player, int x, int y, int x_dir, int y_dir, const F &field) {
-	if (x + x_dir < playfield::width && y + y_dir < playfield::height &&
+	if (x + x_dir < F::width && y + y_dir < F::height &&
 			x + x_dir >= 0 && y + y_dir >= 0) {
 		if (field.stoneat(x + x_dir, y + y_dir)-48 == player) {
 				return recursive_can_win(player, x + x_dir, y + y_dir, x_dir, y_dir, field)+1;
@@ -119,7 +118,7 @@ int player<F>::recursive_can_win(int player, int x, int y, int x_dir, int y_dir,
  */
 template<typename F>
 int player<F>::height_for_row(int x, const F &field) {
-	int height = playfield::height-1;
+	int height = F::height-1;
 	int token = field.stoneat(x,height)-48;
 	while (token != 0 && height >= 0) {
 		height -= 1;
@@ -136,8 +135,8 @@ int player<F>::height_for_row(int x, const F &field) {
 template<typename F>
 int player<F>::get_player_nr(const F &field){
 	int cnt=0;
-	for(int i=0; i<playfield::width;i++){
-		for(int j=0; j<playfield::height;j++){
+	for(int i=0; i<F::width;i++){
+		for(int j=0; j<F::height;j++){
 			if(field.stoneat(i,j)-48!=0){
 				cnt++;
 			}
