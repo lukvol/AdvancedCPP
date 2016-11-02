@@ -83,10 +83,10 @@ template<typename F>
 int player<F>::can_win(int player, const F &field) {
 	for (int i = 0; i < F::width; i++) {
 		int j=height_for_row(i,field);
-		if (recursive_can_win(player, i, j, 1, 1, field)+recursive_can_win(player, i, j, -1, -1, field)>=3 ||
+		if (j >= 0 && (recursive_can_win(player, i, j, 1, 1, field)+recursive_can_win(player, i, j, -1, -1, field)>=3 ||
 			recursive_can_win(player, i, j, 1, 0, field)+recursive_can_win(player, i, j, -1, 0, field)>=3 ||
 			recursive_can_win(player, i, j, -1, 1, field)+recursive_can_win(player, i, j, 1, -1, field)>=3 ||
-			recursive_can_win(player, i, j, 0, 1, field)>=3){
+			recursive_can_win(player, i, j, 0, 1, field)>=3)){
 				return i;
 				}
 		}
