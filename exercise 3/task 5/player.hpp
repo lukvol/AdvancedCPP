@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 #include <iostream>
-#include <ctime>
+#include <random>
 
 /**
  * Class player, which is used to play the game as player or against a bot.
@@ -16,13 +16,18 @@ private:
 	int recursive_can_win(int player, int x, int y, int x_dir, int y_dir, const F &field);
 	int height_for_row(int x, const F &field);
 	int get_player_nr(const F &field);
+	std::default_random_engine generator;
+	std::uniform_int_distribution<> distribution;
 public:
 	/**
 	 * Initiates the player. if the player is a bot, it will get a 0,
 	 * if it is a human interacting with the app, its 1
 	 * @param field field of game played now
 	 */
-	player(int player_mode = 0) : mode(player_mode) {}
+	player(int player_mode = 0) : mode(player_mode) {
+		generator = std::default_random_engine(time(0));
+     	distribution = std::uniform_int_distribution<>(0, 7);
+	}
 	// returns the column where the player decides to throw in his 
 	// stone
   	int play(const F &field);
@@ -51,8 +56,7 @@ int player<F>::play(const F &field) {
 			return cL;
 		}
 		//Random number, if there is no case met.
-		std::srand(std::time(0));
-		int rngsus = (std::rand() % 6) + 1;
+		int rngsus = distribution(generator);
 		std::cout << "4-chan: "<<rngsus << std::endl;
 		return rngsus;
 	} else {
