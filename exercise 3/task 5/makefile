@@ -16,5 +16,8 @@ playfield.o: playfield.hpp playfield.cpp
 	$(CC) $(CFLAGS) playfield.cpp
 
 clean:
-	\rd *.o
-	\rd *.txt
+	\rm -f driver *.o
+
+distclean: clean
+	\rm -f .depend/*.d
+	\rm -f *~

@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 
 #include <iostream>
+#include <ctime>
 
 /**
  * Class player, which is used to play the game as player or against a bot.
@@ -50,7 +51,8 @@ int player<F>::play(const F &field) {
 			return cL;
 		}
 		//Random number, if there is no case met.
-		int rngsus = std::rand() % 6;
+		std::srand(std::time(0));
+		int rngsus = (std::rand() % 6) + 1;
 		std::cout << "4-chan: "<<rngsus << std::endl;
 		return rngsus;
 	} else {
