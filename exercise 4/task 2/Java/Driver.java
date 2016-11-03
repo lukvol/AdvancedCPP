@@ -10,11 +10,13 @@ public class Driver<E> {
 		
 		Vector vector = new Vector();
 		for(int i=0; i< 10000000; i++){
-		vector.add(i);
+			vector.add(i);
 		}
-		
+
+		long oldTime= System.currentTimeMillis();
 		Iterator i = vector.iterator();
 		System.out.println(d.findIf(i,m).toString());
+		System.out.println("It only took us: "+ (System.currentTimeMillis()-oldTime) +" Milliseconds");
 	}
 
 	

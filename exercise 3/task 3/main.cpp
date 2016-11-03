@@ -5,9 +5,9 @@
 int main(int argc, char* argv[]) {
 	if (argc > 1) {
 		std::cout << "Enter 'i' for int, 'd' for double or 'f' for fractions: ";
-		char command;
-		std::cin >> command;
-		switch(command) {
+		std::string input;
+		getline(std::cin, input);
+		switch(input.at(0)) {
 			case 'i': {
 				RPN<int> rpn = RPN<int>(std::string(argv[1]));
 				rpn.start();
@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
 			}
 			case 'f': {
 				RPN<fraction> rpn = RPN<fraction>(std::string(argv[1]));
+				std::cout << "To enter a fraction, write 'n counter/denominator' (e.g. n 1/7 for 1/7): " << std::endl;
 				rpn.start();
 				break;
 			}

@@ -4,9 +4,9 @@
 
 int main() {
 	std::cout << "Enter 'i' for int, 'd' for double or 'f' for fractions: ";
-	char command;
-	std::cin >> command;
-	switch(command) {
+	std::string input;
+	getline(std::cin, input);
+	switch(input.at(0)) {
 		case 'i': {
 			RPN<int> rpn;
 			rpn.start();
@@ -19,6 +19,7 @@ int main() {
 		}
 		case 'f': {
 			RPN<fraction> rpn;
+			std::cout << "To enter a fraction, write 'n counter denominator' (e.g. n 1 7 for 1/7): " << std::endl;
 			rpn.start();
 			break;
 		}

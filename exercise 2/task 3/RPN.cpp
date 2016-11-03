@@ -53,7 +53,7 @@ void RPN::execute_operation(char operation) {
 				break;
 			}
 			case '/': {
-				if (stack.at(stack.size() - 2) == 0) {
+				if (stack.at(stack.size() - 1) == 0) {
 					throw std::invalid_argument("You can't divide by 0!");
 					break;
 				} else {
@@ -87,6 +87,9 @@ void RPN::execute_operation(char operation) {
 void RPN::parse_input(char command, std::istringstream &fst) {
 	switch (command) {
 		case '+': case '-': case '*': case'/': {
+			//if the rpn fails to execute the operation (namely, if the user wants to
+			//divide through 0), we restart the rpn operator but with the stack content
+			//remaining.
 			try {
 				execute_operation(command);
 			} catch (std::exception& ex) {

@@ -13,10 +13,8 @@ public class Driver<E> {
 		vector.add(i);
 		}
 
-		long oldTime= System.currentTimeMillis();
 		Iterator i = vector.iterator();
 		System.out.println(d.findIf(i,m).toString());
-		System.out.println("It only took us: "+ (System.currentTimeMillis()-oldTime) +" Milliseconds");
 	}
 
 	

@@ -22,4 +22,12 @@ int main() {
 	std::cout << f1 << " == " << f2 << " = " << (f1==f2) << std::endl;
 	std::cout << f1 << " != " << f2 << " = " << (f1!=f2) << std::endl;
 	std::cout << f1 << " != " << "(2/4)" << " = " << (f1!=f3) << std::endl;
+	std::cout << f2 << " - " << f2 << " = " << (f2 - f2) << std::endl;
+
+	std::cout << "Creating fractio with 0 as denominator: " << std::endl;
+	try {
+   		fraction f4(1,0);
+	} catch (const std::exception& e) { // reference to the base of a polymorphic object
+     	std::cout << e.what(); // information from length_error printed
+	}
 }
