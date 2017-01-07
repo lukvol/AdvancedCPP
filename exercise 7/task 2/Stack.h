@@ -2,9 +2,9 @@
 #define STACK_H
 
 class Stack {
-	
-public:
+protected:
 	int buf[256], sp;
+public:
 	Stack() { sp = 256; }
 	virtual void push(int i) { buf[--sp] = i; }
 	virtual int pop() { return buf[sp++]; }

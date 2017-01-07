@@ -6,7 +6,6 @@
 
 void fill(Stack s) {
 	std::cout << s.pop() << std::endl;
-	std::cout << s.sp << std::endl;
 	s.push(2);
 }
 
@@ -34,8 +33,15 @@ int main() {
 
 	us.push(2);
 	us.push(4);
+	us.push(12);
 
 	fill(us);
+
+	for (int i = 0; i < 1234; i++) {
+		fill2(us);
+	}
 	
+	std::cout << "Size: " << us.size() << std::endl;
+
 	return 0;
 }
