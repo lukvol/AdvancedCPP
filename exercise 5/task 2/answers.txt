@@ -1,0 +1,16 @@
+Difference between swap and c_swap at compiler level
+----------------------------------------------------
+There is no difference between the assembly codes generated 
+from a function using cswap and a function using swap. 
+It appears that the compiler passes references (here int a and int b) 
+as pointers. 
+However, this does not seem something specified in the C++ specification
+but just something a lot of common compilers are doing.
+http://stackoverflow.com/a/6954796
+
+Difference between inline and normal
+------------------------------------
+There appears to be no difference between the functions having an inline 
+keyword and the ones who don't. This is due to the inline keyword only being
+a recommendation. The compiler is usually smart enough to decide on its own which
+functions to inline and which not to.
