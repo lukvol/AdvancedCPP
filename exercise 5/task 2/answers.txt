@@ -10,7 +10,17 @@ http://stackoverflow.com/a/6954796
 
 Difference between inline and normal
 ------------------------------------
-There appears to be no difference between the functions having an inline 
-keyword and the ones who don't. This is due to the inline keyword only being
-a recommendation. The compiler is usually smart enough to decide on its own which
-functions to inline and which not to.
+https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+
+No Optimization (-O0)
+With no optimization, there is no difference between the version which uses the inline keyword and the one which does not. The reason is that the flag -fno-inline is set by default, which means that no functions except those with a always_inline keyword are inlined. 
+
+-01
+This optimization sets the -finline-functions-called-once flag. This flag considers the inline keyword as well as static functions which are only called once to inline. Since we use lcm two times, there are no static functions which are only called once and therefore, the version with the inline keyword inlines its
+functions whereas the normal version does not. This can also be seen in the assembly code generated. The inline version has all calls after the main directive, whereas the normal version has saved the function (lcm) in a register (.LFE4). The main difference instruction-wise is that the normal version has to call the function in .LFE4 two times (59 vs 61 lines).
+
+-02
+This optimization sets the -finline-small-functions flag. Here, the compiler inlines functions as long as they do not increase the overall size of the program. We saw in -01, that the size of the code is smaller when inlined, and therefore, both versions are inlined. Therefore, there are no differences between the two versions.
+
+-03
+This optimization sets the -finline-functions flag. Here, the compiler inlines all functions which are considered worth to be inlined even if the overall size of the program is increased. Since the compiler already inlined everything in -02 which was worth to be inlined, there is no difference between the two versions.
