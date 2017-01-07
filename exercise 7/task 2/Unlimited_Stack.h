@@ -38,7 +38,7 @@ public:
 	}
 
 	virtual int empty() { return index == 0 && sp == 256; }
-	int size() { return (256 - sp) * (index + 1); }
+	int size() { return (256 - sp) + index * 256; }
 };
 
 #endif
