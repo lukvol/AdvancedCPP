@@ -17,7 +17,7 @@ private:
 	int height_for_row(int x, const playfield &field);
 	int get_player_nr(const playfield &field);
 	void empty_mid(const playfield &field, int begin, int end);
-	bool first_run=false;
+	bool first_run = true;
 	int right;
 	int mid;
 	int left;

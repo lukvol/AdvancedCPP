@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-int main(int argc, char const *argv[]) {
+int main() {
 	humanplayer p1;
 	computerplayer p2;
 	connect4 con(&p1, &p2);

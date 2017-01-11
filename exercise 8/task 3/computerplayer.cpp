@@ -12,22 +12,23 @@ int computerplayer::play(const playfield &field) {
 			t1->join();
 			t2->join();
 			t3->join();
+			delete t1;
+			delete t2;
+			delete t3;
 		}
+
 		mid=0;
 		right=0;
 		left=0;
-
-		first_run=true;
 
 		int plnum=get_player_nr(field);
 		int ennum =plnum == 1 ? 2 : 1;
 		int cW= can_win(plnum,field);
 		int cL= can_win(ennum,field);
 
-
-		t1= new std::thread(&computerplayer::empty_mid, this, field, 0 , 2);
-		t2= new std::thread(&computerplayer::empty_mid, this, field, 2,5);
-		t3= new std::thread(&computerplayer::empty_mid, this, field, 5,7);
+		t1 = new std::thread(&computerplayer::empty_mid, this, std::ref(field), 0, 2);
+		t2 = new std::thread(&computerplayer::empty_mid, this, std::ref(field), 2, 5);
+		t3 = new std::thread(&computerplayer::empty_mid, this, std::ref(field), 5, 7);
 
 
 		if(cW!=-1){
