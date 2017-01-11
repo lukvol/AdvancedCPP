@@ -1,4 +1,4 @@
-CC = g++
+CC = g++-6
 DEBUG = -g
 CFLAGS = -Wall -Wextra -Werror -c
 LFLAGS = -Wall $(DEBUG)

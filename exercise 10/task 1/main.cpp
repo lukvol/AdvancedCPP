@@ -13,5 +13,6 @@ int main() {
 	fl.push_front(2);
 
 	std::cout << my_distance<std::vector<int>::iterator>(v.begin(), v.end()) << std::endl;
+	std::cout << my_distance<std::forward_list<int>::iterator>(fl.begin(), fl.end()) << std::endl;
 	return 0;
 }

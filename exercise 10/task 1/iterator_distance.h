@@ -3,19 +3,28 @@
 template<bool B, typename T = void>
 using EnableIf = typename std::enable_if<B,T>::type;
 
+template <typename Iter>
+using DifferenceTypeOf = typename std::iterator_traits<Iter>::difference_type;
+
+template <typename Iter>
+using IteratorCategoryOf = typename std::iterator_traits<Iter>::iterator_category;
+
 using SubtractableIterator = std::bidirectional_iterator_tag;
 
-template<typename It>
-typename std::iterator_traits<It>::difference_type my_distance(It first, It last, typename std::enable_if<std::is_same<typename std::iterator_traits<It>::iterator_category,
-           SubtractableIterator>::value>::type* = 0) { return last-first; }
+template<typename Iter>
+EnableIf<std::is_same<IteratorCategoryOf<Iter>, SubtractableIterator>::value, 
+		 DifferenceTypeOf<Iter>> my_distance(Iter first, Iter last) { return last-first; }
 
-template<typename It> 
-typename std::iterator_traits<It>::difference_type my_distance(It first, It last, typename std::enable_if<!std::is_same<typename std::iterator_traits<It>::iterator_category,
-           SubtractableIterator>::value>::type* = 0) { 
-	typename std::iterator_traits<It>::difference_type n = 0;
+template<typename Iter> 
+EnableIf<!std::is_same<IteratorCategoryOf<Iter>, SubtractableIterator>::value, 
+		 DifferenceTypeOf<Iter>> my_distance(Iter first, Iter last) { 
+	typename std::iterator_traits<Iter>::difference_type n = 0;
 	while (first != last) {
 		++first;
 		++n;
 	}
 	return n;
 }
+
+
+
