@@ -2,7 +2,7 @@ CC = g++
 DEBUG = -g
 CFLAGS = -Wall -Wextra -c -std=c++11
 LFLAGS = -Wall $(DEBUG)
-OBJS = driver.o my_playfield.o computerplayer.o humanplayer.o bot_ivan.o player_nico.o
+OBJS = driver.o my_playfield.o computerplayer.o humanplayer.o
 
 all: driver
 
@@ -20,12 +20,6 @@ computerplayer.o: player.hpp computerplayer.hpp computerplayer.cpp
 
 humanplayer.o: player.hpp humanplayer.hpp humanplayer.cpp
 	$(CC) $(CFLAGS) humanplayer.cpp
-
-bot_ivan.o: player.hpp bot_ivan.h bot_ivan.cpp
-	$(CC) $(CFLAGS) bot_ivan.cpp
-
-player_nico: player.hpp player_nico.h player_nico.cc
-	$(CC) $(CFLAGS) player_nico.cpp
 
 clean:
 	\rm -f driver *.o
